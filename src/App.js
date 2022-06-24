@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
 function App() {
+  const max_width = 500;
+  const step = 100;
+
+  const RecurrentDiv = ({ width }) => {
+    const style = {
+      width: `${width}px`,
+      height: `${width}px`,
+    };
+
+    return width < step ? null : (
+      <div style={style} className="rectangle-container">
+        <RecurrentDiv width={width - step} />
+      </div>
+    );
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <RecurrentDiv width={max_width} />
     </div>
   );
 }
